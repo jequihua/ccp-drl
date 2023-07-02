@@ -64,7 +64,7 @@ class Landscape(gym.Env):
         print("Initial weighted IIC.")
         print(self.iic_init)
 
-        # The observation space, "position" is the coordinates of the agent; "grid" contains the full grid info
+        # The observation space, it's a vector of the positions played up to a certain time step.
         self.observation_space = gym.spaces.Box(low=-1, high=self.n_actions,
                                        shape=(self.budget_init,),
                                        dtype=np.float64)
@@ -75,14 +75,13 @@ class Landscape(gym.Env):
     def reset(self, seed = None):
         super().reset(seed=seed)
 
-        # Reset initial values.
+        # Reset to initial values for next training episode.
         self.budget = self.budget_init
         self.grid = self.grid_init.copy()
         self.lastposition = self.n_actions-1
         self.taken_actions = np.ones((self.budget))*-1
         self.step_n = 0
 
-        # Reset initial values.
         observation = self._get_obs()
         info = {}
 
@@ -90,7 +89,7 @@ class Landscape(gym.Env):
 
 
     def _get_obs(self):
-        # return observation in the format of self.observation_space
+        # Return observation in the format of self.observation_space.
         return np.sort(self.taken_actions)[::-1]
 
     def step(self, action):
