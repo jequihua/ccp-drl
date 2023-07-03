@@ -64,7 +64,7 @@ class Landscape(gym.Env):
         print("Initial weighted IIC.")
         print(self.iic_init)
 
-        # The observation space, it's a vector of the positions played up to a certain time step.
+        # The observation space, it's an (ordered) vector of the positions played up to a certain time step.
         self.observation_space = gym.spaces.Box(low=-1, high=self.n_actions,
                                        shape=(self.budget_init,),
                                        dtype=np.float64)
@@ -93,7 +93,7 @@ class Landscape(gym.Env):
         return np.sort(self.taken_actions)[::-1]
 
     def step(self, action):
-        # Agents movement
+        # Agents movement.
         step = action
 
         if self.step_n < self.budget_init:
@@ -114,7 +114,7 @@ class Landscape(gym.Env):
         reward = 0
         info = {}
 
-        # Add vegetation patch
+        # Add vegetation patch.
         if self.grid[self.coordx, self.coordy] == self.NONNATURAL and self.budget > 0:
             self.grid[self.coordx, self.coordy] = self.NATURAL
 
@@ -162,12 +162,12 @@ class Landscape(gym.Env):
 
     def landscape_plot(self, plot_inline=False):
         veg_ind = (self.grid == self.NATURAL)
-        # Create color array for plot, default white color
-        Color_array = np.zeros((self.dimx, self.dimy, 3), dtype=np.uint8) # default black
-        # + 255  if we want white
-        Color_array[veg_ind, :] = np.array([0, 255, 0])  # green vegetation
-        Color_array[self.coordx, self.coordy, :] = np.array([0, 0, 255])  # bluish agent
-        # plot
+
+        # Create color array for landscape plotting.
+        Color_array = np.zeros((self.dimx, self.dimy, 3), dtype=np.uint8) # Default black.
+        Color_array[veg_ind, :] = np.array([0, 255, 0])  # Green vegetation.
+        Color_array[self.coordx, self.coordy, :] = np.array([0, 0, 255])  # Blue agent.
+        # Plot.
         if plot_inline:
             fig = plt.figure()
             plt.axis('off')

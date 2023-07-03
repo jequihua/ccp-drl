@@ -111,11 +111,11 @@ def conefor(polygons_area_matrix,
 
     else:
         result = subprocess.call([CONEFOR_EXECUTABLE,
-                              "-nodeFile", NODES_FILE,
-                              "-conFile", DISTANCES_FILE,
-                              "-confAdj", "85",
-                              "-IIC", "onlyoverall"],
-                             stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
+                                  "-nodeFile", NODES_FILE,
+                                  "-conFile", DISTANCES_FILE,
+                                  "-confProb", "2000", "0.5",
+                                  "-PC", "onlyoverall"],
+                                 stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
 
         indices = np.loadtxt('overall_indices.txt', usecols=(1))
 
