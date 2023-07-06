@@ -77,7 +77,7 @@ class Landscape(gym.Env):
         np.savetxt(self.FULLPATH + 'nodes.txt', area_matrix, fmt='%d')
         distances = gs.distance_polys_table(polys_gp)
         distances.to_csv(self.FULLPATH + 'distances.txt', header=None, index=None, sep=' ')
-        pc = gs.conefor(area_matrix, path=self.FULLPATH) / self.extentarea
+        pc = gs.conefor(area_matrix, path=self.FULLPATH, ec=True) / self.extentarea
         self.pc_init = pc.copy()
         self.pc_current = self.pc_init.copy()
         self.pc_change = 0
@@ -165,7 +165,7 @@ class Landscape(gym.Env):
             np.savetxt(self.FULLPATH + 'nodes.txt', area_matrix, fmt='%d')
             distances = gs.distance_polys_table(polys_gp)
             distances.to_csv(self.FULLPATH + 'distances.txt', header=None, index=None, sep=' ')
-            pc = gs.conefor(area_matrix, path=self.FULLPATH)/self.extentarea
+            pc = gs.conefor(area_matrix, path=self.FULLPATH, ec=True)/self.extentarea
 
             self.pc_change = np.around(((pc - self.pc_current)/self.pc_current)*100,4)
 
