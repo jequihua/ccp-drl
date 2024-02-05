@@ -1,6 +1,9 @@
 # ccp-drl
 Connectivity Conservation Planning through Deep Reinforcement Learning.
 
+[![DOI](https://zenodo.org/badge/661144875.svg)](https://zenodo.org/doi/10.5281/zenodo.10618899)
+
+
 Requirements:
 
 geopandas==0.13.2 <br />
